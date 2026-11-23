@@ -1,0 +1,389 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Cuponera · Informe ejecutivo de apps · Septiembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #00D2A3; --teal-dark: #049379; --teal-deep: #036B57;
+    --ink: #0B3B36; --gray: #5C6E6A; --gray-light: #E8F5F2;
+    --bg: #F7FDFC; --card: #FFFFFF; --coral: #FF6B57; --amber: #E8A13A;
+    --amber-bg: #FEFBF5; --line: #D7EEE8; --android: #3DDC84; --ios: #0B3B36;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #E4F4F0; --gray: #9DB3AE; --gray-light: #16302C; --bg: #0E1F1C;
+      --card: #142824; --line: #234440; --teal-deep: #4FE3BF; --amber-bg: #2A2316; --ios: #E4F4F0;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #E4F4F0; --gray: #9DB3AE; --gray-light: #16302C; --bg: #0E1F1C;
+    --card: #142824; --line: #234440; --teal-deep: #4FE3BF; --amber-bg: #2A2316; --ios: #E4F4F0;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { margin: 0; font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+  .display { font-family: 'Fraunces', Georgia, serif; }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+  header.hero { position: relative; background: linear-gradient(160deg, #036B57 0%, #049379 55%, #00D2A3 100%); color: #fff; padding: 64px 40px 84px; overflow: hidden; }
+  header.hero::after { content: ""; position: absolute; right: -80px; top: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+  .hero-inner { max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 22px; height: 1px; background: rgba(255,255,255,0.6); }
+  h1.hero-title { font-size: clamp(30px, 4.6vw, 46px); font-weight: 600; margin: 0 0 16px; max-width: 800px; line-height: 1.14; }
+  .hero-sub { font-size: 16.5px; max-width: 680px; opacity: 0.94; margin: 0; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 40px 100px; }
+
+  nav.funnel-nav { display: flex; flex-wrap: wrap; margin-top: -44px; margin-bottom: 40px; background: var(--card); border-radius: 16px; box-shadow: 0 12px 34px rgba(3,107,87,0.14); overflow: hidden; position: relative; z-index: 2; }
+  nav.funnel-nav a { flex: 1; min-width: 110px; text-decoration: none; color: var(--ink); padding: 16px 10px; text-align: center; font-size: 12px; font-weight: 600; border-right: 1px solid var(--line); }
+  nav.funnel-nav a:last-child { border-right: none; }
+  nav.funnel-nav a:hover, nav.funnel-nav a:focus-visible { background: var(--gray-light); outline: none; }
+  nav.funnel-nav a .num { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--teal-dark); margin-bottom: 4px; }
+  nav.funnel-nav a.off { color: var(--gray); }
+  nav.funnel-nav a.off .num { color: var(--amber); }
+
+  /* Resumen */
+  .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 56px; }
+  .sum { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; }
+  .sum .lbl { font-size: 12.5px; color: var(--gray); margin-bottom: 8px; }
+  .sum .big { font-family: 'Fraunces', serif; font-size: 34px; font-weight: 600; color: var(--teal-deep); line-height: 1; }
+  .sum .delta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; margin-top: 8px; }
+  .sum.pending { border-style: dashed; border-color: var(--amber); background: var(--amber-bg); }
+  .sum.pending .big { color: var(--amber); font-size: 22px; }
+  @media (max-width: 820px) { .summary { grid-template-columns: 1fr 1fr; } }
+
+  section.stage { margin-bottom: 52px; scroll-margin-top: 24px; }
+  .stage-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .stage-num { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal-dark); background: var(--gray-light); border-radius: 100px; padding: 4px 12px; white-space: nowrap; }
+  h2.stage-title { font-size: 24px; font-weight: 600; margin: 0; }
+
+  .metric-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px 28px; }
+  .metric-card.pending { border-style: dashed; border-color: var(--amber); background: var(--amber-bg); }
+  .metric-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+  .metric-name { font-size: 18px; font-weight: 600; color: var(--teal-deep); margin: 0; }
+  .metric-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; background: var(--teal); color: #fff; padding: 3px 10px; border-radius: 100px; white-space: nowrap; }
+  .metric-tag.amber { background: var(--amber); }
+  .metric-tag.gray { background: var(--gray); }
+  .metric-formula { background: var(--gray-light); border-radius: 8px; padding: 9px 12px; font-size: 12.5px; color: var(--teal-deep); margin: 10px 0 6px; display: inline-block; }
+  .metric-source { font-size: 12px; color: var(--gray); display: flex; align-items: center; gap: 6px; margin-bottom: 18px; }
+  .metric-source::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+  .def { font-size: 13.5px; color: var(--gray); margin: 0 0 8px; }
+
+  /* Cifra total + split por plataforma */
+  .figure { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 14px; margin-top: 6px; }
+  .fig { background: var(--gray-light); border-radius: 12px; padding: 16px 18px; }
+  .fig.total { background: var(--teal-deep); color: #fff; }
+  .fig .k { font-size: 12px; opacity: 0.85; display: flex; align-items: center; gap: 7px; }
+  .fig .k .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .fig .big { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; line-height: 1.1; margin-top: 6px; color: var(--teal-deep); }
+  .fig.total .big { color: #fff; font-size: 38px; }
+  .fig .delta { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; margin-top: 6px; }
+  .fig.total .delta { color: #C9FFF0; }
+  @media (max-width: 720px) { .figure { grid-template-columns: 1fr; } }
+
+  .up { color: var(--teal-dark); font-weight: 600; }
+  .down { color: var(--coral); font-weight: 600; }
+  .flat { color: var(--gray); font-weight: 600; }
+
+  .sub-list { border-top: 1px dashed var(--line); padding-top: 16px; margin-top: 20px; }
+  .sub-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .sub-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .sub-marker { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 7px; flex-shrink: 0; }
+  .sub-body { flex: 1; min-width: 0; }
+  .sub-name { font-size: 14.5px; font-weight: 600; margin: 0 0 4px; }
+  .sub-def { font-size: 13.5px; color: var(--gray); margin: 0 0 8px; }
+  .sub-formula { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal-deep); background: var(--gray-light); display: inline-block; padding: 4px 10px; border-radius: 6px; margin-bottom: 6px; }
+  .sub-source { font-size: 11.5px; color: var(--gray); }
+
+  .tbl-wrap { overflow-x: auto; margin-top: 14px; }
+  table.mini { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
+  table.mini th { text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--teal-dark); border-bottom: 1px solid var(--line); padding: 8px 10px; }
+  table.mini th.r, table.mini td.r { text-align: right; }
+  table.mini td { padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  table.mini tr:last-child td { border-bottom: none; }
+  table.mini td.r { font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+
+  .pending-note { font-size: 13.5px; color: var(--gray); margin: 0; }
+  .pending-note strong { color: #9A6613; }
+
+  .callout { background: var(--gray-light); border-left: 3px solid var(--teal); border-radius: 0 10px 10px 0; padding: 16px 20px; font-size: 14px; margin-top: 22px; }
+  .callout strong { color: var(--teal-deep); }
+  .callout.warn { border-left-color: var(--amber); }
+  .callout.warn strong { color: #9A6613; }
+  .callout ul { margin: 8px 0 0; padding-left: 18px; }
+  .callout li { margin-bottom: 4px; }
+
+  footer { text-align: center; padding: 40px; font-size: 12.5px; color: var(--gray); border-top: 1px solid var(--line); }
+  @media (max-width: 600px) { .wrap { padding: 0 18px 80px; } header.hero { padding: 48px 20px 72px; } .metric-card { padding: 20px; } }
+
+
+  /* Barras apiladas marca / genérico */
+  .stack-row { display: grid; grid-template-columns: 74px 1fr 78px; gap: 12px; align-items: center; margin: 10px 0; font-size: 12.5px; }
+  .stack-row .yr { font-family: 'IBM Plex Mono', monospace; color: var(--gray); }
+  .stack-row .tt { font-family: 'IBM Plex Mono', monospace; text-align: right; font-weight: 600; }
+  .stack { display: flex; height: 26px; border-radius: 7px; overflow: hidden; background: var(--gray-light); }
+  .stack span { display: block; height: 100%; }
+  .s-brand { background: var(--teal-deep); } .s-nb { background: var(--teal); } .s-anon { background: repeating-linear-gradient(135deg, var(--line) 0 6px, var(--gray-light) 6px 12px); }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; color: var(--gray); margin: 4px 0 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  h3.block-title { font-size: 15px; margin: 26px 0 4px; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Propuesta de informe ejecutivo · La Cuponera (Android + iOS)</div>
+    <h1 class="hero-title display">Cierre de septiembre 2026: base de usuarios y movimiento del mes</h1>
+    <p class="hero-sub">Informe mensual centrado en negocio: cuántos usuarios tienen la app, cuántos entran y cuántos se van. Solo incluye métricas que podemos validar en Play Console y App Store Connect; los datos de registro se incorporarán cuando estén disponibles.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="funnel-nav" aria-label="Secciones">
+    <a href="#base"><span class="num">01</span>Base con app</a>
+    <a href="#base-reg" class="off"><span class="num">02</span>Base registrada</a>
+    <a href="#descargas"><span class="num">03</span>Nuevas descargas</a>
+    <a href="#registros" class="off"><span class="num">04</span>Nuevos registros</a>
+    <a href="#desinstalaciones"><span class="num">05</span>Desinstalaciones</a>
+    <a href="#neto"><span class="num">06</span>Balance neto</a>
+    <a href="#contexto"><span class="num">07</span>Store y valoración</a>
+    <a href="#organico"><span class="num">08</span>SEO marca / genérico</a>
+  </nav>
+
+  <!-- RESUMEN -->
+  <div class="summary">
+    <div class="sum"><div class="lbl">Dispositivos con la app</div><div class="big">724.132</div><div class="delta up">▲ 2,0% vs. agosto</div></div>
+    <div class="sum"><div class="lbl">Nuevas descargas</div><div class="big">114.370</div><div class="delta up">▲ 22,9% vs. agosto</div></div>
+    <div class="sum"><div class="lbl">Desinstalaciones</div><div class="big">81.079</div><div class="delta flat">▲ 1,2% vs. agosto</div></div>
+    <div class="sum pending"><div class="lbl">Registros (base y nuevos)</div><div class="big">Pendiente</div><div class="delta flat">Sin fuente aún</div></div>
+  </div>
+
+  <!-- 01 BASE CON APP -->
+  <section class="stage" id="base">
+    <div class="stage-head"><span class="stage-num">01 / 08</span><h2 class="stage-title display">Baseline de usuarios con la app descargada</h2></div>
+    <div class="metric-card">
+      <div class="metric-head"><p class="metric-name">Dispositivos con la app instalada a cierre de mes</p><span class="metric-tag">KPI NÚCLEO</span></div>
+      <p class="def">Foto del parque activo a 30 de septiembre: dispositivos que tienen hoy la app instalada. Es el punto de partida sobre el que se mide el resto del mes.</p>
+      <div class="metric-source">Play Console · Dispositivos instalados &nbsp;|&nbsp; App Store Connect · Dispositivos instalados</div>
+      <div class="figure">
+        <div class="fig total"><div class="k">Total apps</div><div class="big">724.132</div><div class="delta">▲ +14.379 · +2,0% vs. agosto</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--android)"></span>Android</div><div class="big">682.527</div><div class="delta up">▲ +8.874 · +1,3%</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--ios)"></span>iOS</div><div class="big">41.605</div><div class="delta up">▲ +5.505 · +15,3%</div></div>
+      </div>
+      <div class="callout warn">
+        <strong>Definición a cerrar con el cliente:</strong> Android pesa el 94% de la base. Play Console ofrece la base por dispositivo (682.527) y por usuario (≈641.000 a finales de septiembre). Proponemos fijar <strong>dispositivo</strong> como criterio para todo el año, igual que en descargas, para que la serie sea comparable mes a mes.
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 BASE REGISTRADA -->
+  <section class="stage" id="base-reg">
+    <div class="stage-head"><span class="stage-num">02 / 08</span><h2 class="stage-title display">Baseline de usuarios registrados</h2></div>
+    <div class="metric-card pending">
+      <div class="metric-head"><p class="metric-name">Cuentas registradas a cierre de mes</p><span class="metric-tag amber">PENDIENTE DE FUENTE</span></div>
+      <div class="metric-formula mono">Cuentas activas registradas a último día del mes</div>
+      <div class="metric-source">Backend / base de datos de producto de La Cuponera</div>
+      <p class="pending-note"><strong>Dato no disponible este mes.</strong> Necesitamos que el cliente nos facilite el total de cuentas registradas a 30 de septiembre (y, si es posible, a 31 de agosto) para fijar la línea base. Con él podremos calcular la proporción de dispositivos con cuenta: registrados ÷ dispositivos con la app.</p>
+    </div>
+  </section>
+
+  <!-- 03 NUEVAS DESCARGAS -->
+  <section class="stage" id="descargas">
+    <div class="stage-head"><span class="stage-num">03 / 08</span><h2 class="stage-title display">Nuevas descargas</h2></div>
+    <div class="metric-card">
+      <div class="metric-head"><p class="metric-name">Nuevas descargas del mes</p><span class="metric-tag">KPI NÚCLEO</span></div>
+      <p class="def">Dispositivos que instalan la app por primera vez. Excluye reinstalaciones, por lo que mide captación real.</p>
+      <div class="metric-source">Play Console · Device acquisition, New devices (mensual) &nbsp;|&nbsp; App Store Connect · Descargas mensuales</div>
+      <div class="figure">
+        <div class="fig total"><div class="k">Total apps</div><div class="big">114.370</div><div class="delta">▲ +21.278 · +22,9% vs. agosto</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--android)"></span>Android</div><div class="big">97.861</div><div class="delta up">▲ +18,2%</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--ios)"></span>iOS</div><div class="big">16.509</div><div class="delta up">▲ +60,8%</div></div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-item"><div class="sub-marker"></div><div class="sub-body">
+          <p class="sub-name">Descargas totales (incluye reinstalaciones)</p>
+          <p class="sub-def">Android 126.433 (+14,9%), de las que 28.572 son reinstalaciones en dispositivos que ya la tuvieron. En iOS la cifra mensual de App Store Connect es la misma que usamos como nueva descarga.</p>
+          <div class="sub-formula">Primeras descargas + Reinstalaciones</div>
+          <div class="sub-source">Fuente: Play Console · Device acquisition, All devices</div>
+        </div></div>
+        <div class="sub-item"><div class="sub-marker"></div><div class="sub-body">
+          <p class="sub-name">Mejor mes desde marzo en Android</p>
+          <p class="sub-def">Las 97.861 primeras descargas son el mejor dato desde marzo (98.829) y rompen la caída de agosto. La ficha personalizada «Ahorro Septiembre» convirtió al 23,2%, cinco veces más que la ficha por defecto (4,6%).</p>
+          <div class="sub-source">Fuente: Play Console · Store listings</div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 NUEVOS REGISTROS -->
+  <section class="stage" id="registros">
+    <div class="stage-head"><span class="stage-num">04 / 08</span><h2 class="stage-title display">Nuevos registros</h2></div>
+    <div class="metric-card pending">
+      <div class="metric-head"><p class="metric-name">Cuentas nuevas creadas en el mes</p><span class="metric-tag amber">PENDIENTE DE FUENTE</span></div>
+      <div class="metric-formula mono">Tasa de registro = Nuevos registros ÷ Nuevas descargas</div>
+      <div class="metric-source">Backend / base de datos de producto de La Cuponera</div>
+      <p class="pending-note"><strong>Dato no disponible este mes.</strong> En cuanto llegue, cruzaremos los nuevos registros con las 114.370 nuevas descargas de septiembre para ver cuántas instalaciones acaban en una cuenta. Es la primera gran fuga del funnel y hoy no la vemos.</p>
+    </div>
+  </section>
+
+  <!-- 05 DESINSTALACIONES -->
+  <section class="stage" id="desinstalaciones">
+    <div class="stage-head"><span class="stage-num">05 / 08</span><h2 class="stage-title display">Desinstalaciones del mes</h2></div>
+    <div class="metric-card">
+      <div class="metric-head"><p class="metric-name">Desinstalaciones a lo largo del mes</p><span class="metric-tag">KPI NÚCLEO</span></div>
+      <p class="def">Dispositivos que eliminan la app durante septiembre, tanto usuarios nuevos como antiguos.</p>
+      <div class="metric-source">Play Console · Desinstalaciones &nbsp;|&nbsp; App Store Connect · Uso: Desinstalaciones</div>
+      <div class="figure">
+        <div class="fig total"><div class="k">Total apps</div><div class="big">81.079</div><div class="delta">▲ +925 · +1,2% vs. agosto</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--android)"></span>Android</div><div class="big">74.060</div><div class="delta flat">▲ +0,8%</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--ios)"></span>iOS</div><div class="big">7.019</div><div class="delta down">▲ +5,5%</div></div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-item"><div class="sub-marker"></div><div class="sub-body">
+          <p class="sub-name">Desinstalaciones por cada 100 descargas</p>
+          <p class="sub-def">Android 59 (agosto: 67) · iOS 43 (agosto: 65). Las descargas crecieron mucho más que las bajas, así que la fuga relativa mejora en ambas plataformas.</p>
+          <div class="sub-formula">Desinstalaciones ÷ Descargas totales del mes</div>
+          <div class="sub-source">Fuente: Play Console + App Store Connect</div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 BALANCE NETO -->
+  <section class="stage" id="neto">
+    <div class="stage-head"><span class="stage-num">06 / 08</span><h2 class="stage-title display">Balance neto del mes</h2></div>
+    <div class="metric-card">
+      <div class="metric-head"><p class="metric-name">Descargas netas</p><span class="metric-tag">RESULTADO</span></div>
+      <div class="metric-formula mono">Descargas netas = Descargas totales − Desinstalaciones</div>
+      <div class="metric-source">Play Console · App Store Connect</div>
+      <div class="figure">
+        <div class="fig total"><div class="k">Total apps</div><div class="big">61.863</div><div class="delta">▲ +21.669 · +53,9% vs. agosto</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--android)"></span>Android</div><div class="big">52.373</div><div class="delta up">▲ +43,2%</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--ios)"></span>iOS</div><div class="big">9.490</div><div class="delta up">▲ +162,8%</div></div>
+      </div>
+      <div class="callout">
+        <strong>Lectura:</strong> septiembre rompe la tendencia a la baja de julio y agosto. Las bajas se mantienen estables (≈81.000 al mes) y todo el crecimiento viene de la captación. iOS es la plataforma que más mejora en proporción, aunque sigue siendo pequeña en volumen.
+      </div>
+      <div class="callout warn">
+        <strong>Por qué el neto no cuadra con la base:</strong> en Android el neto es +52.373, pero la base de dispositivos solo sube +8.874. Son dos métricas distintas de Play Console: la base cuenta dispositivos activos y descuenta los que dejan de conectarse aunque no desinstalen. Proponemos que el informe muestre la <strong>variación de la base (bloque 01)</strong> como cifra de crecimiento real y el neto como indicador de movimiento del mes.
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 CONTEXTO -->
+  <section class="stage" id="contexto">
+    <div class="stage-head"><span class="stage-num">07 / 08</span><h2 class="stage-title display">Store, valoración y ASO</h2></div>
+    <div class="metric-card">
+      <div class="metric-head"><p class="metric-name">Indicadores de apoyo</p><span class="metric-tag gray">CONTEXTO</span></div>
+      <p class="def">Explican el porqué de los KPIs núcleo. Van al final y en formato compacto.</p>
+      <div class="metric-source">Play Console · App Store Connect · AppTweak</div>
+      <div class="tbl-wrap">
+        <table class="mini">
+          <thead><tr><th>Indicador</th><th class="r">Android</th><th class="r">vs. ago</th><th class="r">iOS</th><th class="r">vs. ago</th></tr></thead>
+          <tbody>
+            <tr><td>Visitas a la ficha</td><td class="r">1.135.368</td><td class="r up">+23,4%</td><td class="r">52.427</td><td class="r up">+18,6%</td></tr>
+            <tr><td>Conversión de la ficha</td><td class="r">8,62%</td><td class="r down">−0,4 pp</td><td class="r">18,80%</td><td class="r up">+6,9 pp</td></tr>
+            <tr><td>Impresiones en store (iOS)</td><td class="r">—</td><td class="r">—</td><td class="r">163.687</td><td class="r up">+14,4%</td></tr>
+            <tr><td>Nota media</td><td class="r">4,57</td><td class="r flat">=</td><td class="r">4,7</td><td class="r flat">=</td></tr>
+            <tr><td>Valoraciones totales</td><td class="r">30.140</td><td class="r up">+586</td><td class="r">16.708</td><td class="r up">+577</td></tr>
+            <tr><td>Comentarios totales</td><td class="r">6.282</td><td class="r up">+76</td><td class="r">1.204</td><td class="r up">+21</td></tr>
+            <tr><td>ASO score</td><td class="r">95%</td><td class="r flat">=</td><td class="r">88%</td><td class="r flat">=</td></tr>
+            <tr><td>Ranking de categoría</td><td class="r">#5</td><td class="r up">sube 7</td><td class="r">#53</td><td class="r up">sube 12</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <strong>Lectura:</strong> más visitas en las dos stores y Android entra en el top 5 de su categoría. La conversión en Android baja ligeramente porque el tráfico extra convierte peor en la ficha por defecto; la ficha personalizada de septiembre demuestra que hay margen si se extiende ese enfoque.
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 SEO MARCA / GENÉRICO -->
+  <section class="stage" id="organico">
+    <div class="stage-head"><span class="stage-num">08 / 08</span><h2 class="stage-title display">Tráfico orgánico web: marca frente a genérico</h2></div>
+    <div class="metric-card">
+      <div class="metric-head"><p class="metric-name">Clics desde Google a lacuponera.es</p><span class="metric-tag">NUEVO</span></div>
+      <p class="def">Separa la demanda que ya conoce La Cuponera (búsquedas de marca) de la captación nueva que aporta el SEO (búsquedas genéricas). La primera refleja notoriedad; la segunda, el trabajo de contenidos.</p>
+      <div class="metric-formula mono">Marca = consultas con «cuponera», «lacuponera» o «próxima a ti» · Genérico = el resto (incluye competidores)</div>
+      <div class="metric-source">Google Search Console · Búsqueda web · Septiembre vs. agosto 2026</div>
+
+      <div class="figure">
+        <div class="fig total"><div class="k">Clics orgánicos totales</div><div class="big">15.083</div><div class="delta">▲ +599 · +4,1% vs. agosto</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--teal-deep)"></span>Marca</div><div class="big">2.453</div><div class="delta down">▼ −7,4%</div></div>
+        <div class="fig"><div class="k"><span class="dot" style="background:var(--teal)"></span>Genérico</div><div class="big">3.786</div><div class="delta up">▲ +6,2%</div></div>
+      </div>
+
+      <h3 class="block-title">Reparto de los clics</h3>
+      <div class="legend"><span><i class="s-brand"></i>Marca</span><span><i class="s-nb"></i>Genérico</span><span><i class="s-anon"></i>Consultas no disponibles</span></div>
+      <div class="stack-row"><span class="yr">Agosto</span><div class="stack" role="img" aria-label="Agosto: marca 18,3%, genérico 24,6%, no disponibles 57,1%"><span class="s-brand" style="width:18.3%"></span><span class="s-nb" style="width:24.6%"></span><span class="s-anon" style="width:57.1%"></span></div><span class="tt">14.484</span></div>
+      <div class="stack-row"><span class="yr">Septiembre</span><div class="stack" role="img" aria-label="Septiembre: marca 16,3%, genérico 25,1%, no disponibles 58,6%"><span class="s-brand" style="width:16.3%"></span><span class="s-nb" style="width:25.1%"></span><span class="s-anon" style="width:58.6%"></span></div><span class="tt">15.083</span></div>
+
+      <div class="tbl-wrap">
+        <table class="mini">
+          <thead><tr><th>Grupo</th><th class="r">Clics sep</th><th class="r">vs. ago</th><th class="r">Impresiones</th><th class="r">vs. ago</th><th class="r">CTR</th><th class="r">Posición</th></tr></thead>
+          <tbody>
+            <tr><td>Marca</td><td class="r">2.453</td><td class="r down">−7,4%</td><td class="r">25.825</td><td class="r up">+38,1%</td><td class="r">9,5% <span class="down">(14,2%)</span></td><td class="r">1,8 <span class="up">(2,2)</span></td></tr>
+            <tr><td>Genérico</td><td class="r">3.786</td><td class="r up">+6,2%</td><td class="r">252.575</td><td class="r up">+1,7%</td><td class="r">1,5% <span class="up">(1,4%)</span></td><td class="r">7,2 <span class="up">(7,6)</span></td></tr>
+            <tr><td>Consultas no disponibles en el export</td><td class="r">8.844</td><td class="r up">+6,9%</td><td class="r">953.334</td><td class="r down">−8,9%</td><td class="r">—</td><td class="r">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="def" style="margin-top:8px;font-size:12.5px">Entre paréntesis, el dato de agosto. Posición media ponderada por impresiones.</p>
+
+      <h3 class="block-title">Vista complementaria por tipo de página</h3>
+      <p class="def">Casi 6 de cada 10 clics vienen de consultas que no aparecen en el export: búsquedas que Google anonimiza por privacidad y consultas de cola larga que quedan fuera del límite de 1.000 filas, sobre todo de los artículos del blog. Agrupar por página cubre el 100% del tráfico y confirma la tendencia.</p>
+      <div class="tbl-wrap">
+        <table class="mini">
+          <thead><tr><th>Páginas</th><th class="r">Clics sep</th><th class="r">Clics ago</th><th class="r">Variación</th></tr></thead>
+          <tbody>
+            <tr><td>Blog (hogar, belleza, familia, ahorro, cuidado personal)</td><td class="r">7.252</td><td class="r">7.247</td><td class="r flat">+0,1%</td></tr>
+            <tr><td>Home</td><td class="r">3.400</td><td class="r">3.758</td><td class="r down">−9,5%</td></tr>
+            <tr><td>Promociones</td><td class="r">1.999</td><td class="r">1.549</td><td class="r up">+29,1%</td></tr>
+            <tr><td>Opiniones</td><td class="r">1.821</td><td class="r">1.562</td><td class="r up">+16,6%</td></tr>
+            <tr><td>Qué es La Cuponera</td><td class="r">676</td><td class="r">416</td><td class="r up">+62,5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Lectura:</strong>
+        <ul>
+          <li><strong>La demanda de marca crece:</strong> las impresiones de marca suben un 38%, en el mismo mes en que las nuevas descargas de la app suben un 23%.</li>
+          <li><strong>Pero la web recibe menos clics de marca:</strong> el CTR de «la cuponera» cae del 20,7% al 11,4% aunque la posición mejora (1,3 → 1,1). Nuestra hipótesis es que parte de esa búsqueda acaba en las fichas de App Store y Google Play que aparecen en el resultado, lo que para el negocio no es una pérdida. Lo validaremos revisando la página de resultados.</li>
+          <li><strong>El genérico sostiene el crecimiento:</strong> +6,2% en clics. Sin las búsquedas del competidor Cuponvero, los clics suben un 4,8% con un 7,7% menos de impresiones, gracias a un mejor CTR. El artículo de olivas caseras (839 clics frente a 182) compensa la caída estacional de costillas al horno.</li>
+          <li><strong>Cuponvero, oportunidad:</strong> las búsquedas de este competidor casi triplican sus impresiones y Google ya muestra lacuponera.es en posición 3, pero solo el 1,9% hace clic. Es tráfico de usuarios que buscan cupones y ya comparan opciones.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="callout warn">
+    <strong>Qué sale del informe ejecutivo y por qué:</strong>
+    <ul>
+      <li><strong>Descargas acumuladas</strong> (4.037.042 Android · 906.733 iOS) y <strong>acumuladas por usuario/dispositivo</strong>: son cifras históricas que no reflejan la base actual y se confunden con ella. Pasan a anexo.</li>
+      <li><strong>CTR e IR de iOS:</strong> muy volátiles mes a mes (IR entre 6% y 22% este año) y dependientes de cómo App Store Connect cuenta impresiones. Se quedan en el seguimiento interno de ASO.</li>
+      <li><strong>Criterio único:</strong> todas las cifras de descargas y base van por dispositivo y por mes natural completo (1–30), para que la serie sea repetible.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  Propuesta de informe ejecutivo · La Cuponera (Android + iOS) · Datos de septiembre 2026 · Play Console, App Store Connect, AppTweak y Google Search Console
+</footer>
+
+</body>
+</html>
+
+</body></html>
